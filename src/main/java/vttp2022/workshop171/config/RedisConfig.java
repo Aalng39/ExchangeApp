@@ -1,9 +1,7 @@
 package vttp2022.workshop171.config;
 
-import java.util.Optional;
+// import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +39,7 @@ public class RedisConfig {
     public RedisTemplate<String, ExchangeRate> redisTemplate() {
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
-        config.setPort(redisPort);
+        config.setPort(Integer.parseInt(redisPort));
         config.setPassword(redisPassword);
         Jackson2JsonRedisSerializer jackson2JsonJsonSerializer = new Jackson2JsonRedisSerializer(ExchangeRate.class);
 
