@@ -18,9 +18,9 @@ import vttp2022.workshop171.Model.ExchangeRate;
 @Configuration
 public class RedisConfig {
 
-    // @Value("${spring.redis.host}")
-    // private String redisHost;
-    String redisHost = System.getenv("REDIS_HOST");
+    @Value("${spring.redis.host}")
+    private String redisHost;
+    // String redisHost = System.getenv("REDIS_HOST");
 
     @Value("${spring.redis.port}")
     private Optional<Integer> redisPort;
