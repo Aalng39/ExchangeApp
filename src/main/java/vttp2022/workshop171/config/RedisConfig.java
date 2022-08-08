@@ -41,7 +41,7 @@ public class RedisConfig {
     public RedisTemplate<String, ExchangeRate> redisTemplate() {
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
-        config.setPort(redisPort.get());
+        config.setPort(redisPort);
         config.setPassword(redisPassword);
         Jackson2JsonRedisSerializer jackson2JsonJsonSerializer = new Jackson2JsonRedisSerializer(ExchangeRate.class);
 
