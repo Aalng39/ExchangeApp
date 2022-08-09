@@ -6,11 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+// import org.springframework.web.util.UriComponentsBuilder;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -61,6 +62,7 @@ public class ExchangeRedis implements ExchangeRepo{
 
         RequestEntity<Void> reqEntity = RequestEntity.get(fullURL)
                                                     .header("apikey", apiKey)
+                                                    .accept(MediaType.APPLICATION_JSON) // Allow JSON APPLICATION
                                                     .build();
 
         ResponseEntity<ExchangeRate> respEntity = 
