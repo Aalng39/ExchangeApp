@@ -21,7 +21,7 @@ import vttp2022.workshop171.Model.Currency;
 import vttp2022.workshop171.Model.ExchangeRate;
 
 @Service
-public class ExchangeService implements ExchangeRepo{
+public class ExchangeRedis implements ExchangeRepo{
     
     @Value("${currency}")
     private String currencyURL;
@@ -29,10 +29,8 @@ public class ExchangeService implements ExchangeRepo{
     private String baseURL;
     // @Value("${apikey}")
     // private String apiKey;
-    
 
-    @Autowired
-    private RestTemplate restTemplate;
+    RestTemplate restTemplate = new RestTemplate();
 
     public void getCurrency(){
         ResponseEntity<String> response = restTemplate.getForEntity(currencyURL, String.class);
@@ -49,15 +47,21 @@ public class ExchangeService implements ExchangeRepo{
 
     public ExchangeRate getResult(String to, String from, BigDecimal amount){
         String apiKey = System.getenv("FIXER_CURRENCY_API_KEY");
-        String fullURL = UriComponentsBuilder.fromUriString(baseURL).
-        queryParam("to", to).
-        queryParam("from", from).
-        queryParam("amount", amount).
-        toUriString();
+        // String fullURL = UriComponentsBuilder.fromUriString(baseURL).
+        // queryParam("to", to).
+        // queryParam("from", from).
+        // queryParam("amount", amount).
+        // toUriString();
+        
+        String fullURL = "https://api.apilayer.com/fixer/convert?to=" + to 
+                    + "&from=" + from 
+                    + "&amount=" + amount;
+
         System.out.println(fullURL);
 
-        RequestEntity<Void> reqEntity = 
-                    RequestEntity.get(fullURL).header("apikey", apiKey).build();
+        RequestEntity<Void> reqEntity = RequestEntity.get(fullURL)
+                                                    .header("apikey", apiKey)
+                                                    .build();
 
         ResponseEntity<ExchangeRate> respEntity = 
                     restTemplate.exchange(reqEntity, ExchangeRate.class);

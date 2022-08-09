@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import vttp2022.workshop171.Model.Currency;
 import vttp2022.workshop171.Model.ExchangeRate;
-import vttp2022.workshop171.Service.ExchangeService;
+import vttp2022.workshop171.Service.ExchangeRedis;
 
 
 
@@ -19,7 +19,7 @@ import vttp2022.workshop171.Service.ExchangeService;
 public class CurrencyController {
 
     @Autowired
-    ExchangeService service;
+    ExchangeRedis service;
     
     @GetMapping
     public String returnIndexPage(Model model){
